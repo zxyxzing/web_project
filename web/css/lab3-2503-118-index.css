@@ -1,0 +1,191 @@
+/* 全局样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Microsoft YaHei", sans-serif;
+}
+
+body {
+  background-color: #f9f7f3;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* 头部 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fdf6ec;
+  padding: 15px 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #6b4f42;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* 导航 */
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #6b4f42;
+  font-size: 15px;
+  transition: color 0.2s;
+}
+
+.nav a:hover {
+  color: #e4a898;
+}
+
+/* 主体容器三栏布局 */
+.container {
+  display: flex;
+  width: 1200px;
+  margin: 30px auto;
+  gap: 20px;
+}
+
+/* 左侧栏 */
+.left-bar {
+  width: 220px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.left-bar h3 {
+  color: #6b4f42;
+  margin-bottom: 15px;
+  font-size: 16px;
+  border-left: 4px solid #e4a898;
+  padding-left: 8px;
+}
+
+.left-bar ul {
+  list-style: none;
+}
+
+.left-bar li {
+  padding: 8px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* 中间内容 */
+.center-bar {
+  flex: 1;
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.center-bar h3 {
+  color: #6b4f42;
+  margin-bottom: 20px;
+  font-size: 17px;
+  border-bottom: 2px solid #f5ebe6;
+  padding-bottom: 8px;
+}
+
+/* 图书列表 */
+.book-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.book-item {
+  width: 130px;
+  text-align: center;
+}
+
+.book-item img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.book-item p {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #666;
+}
+
+/* 新书表格 */
+.new-book-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.new-book-table th,
+.new-book-table td {
+  border: 1px solid #eee;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.new-book-table th {
+  background-color: #fdf6ec;
+  color: #6b4f42;
+}
+
+/* 右侧栏 */
+.right-bar {
+  width: 260px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.right-bar h3 {
+  color: #6b4f42;
+  margin-bottom: 18px;
+  font-size: 16px;
+  border-left: 4px solid #f8c8c8;
+  padding-left: 8px;
+}
+
+.promo-item {
+  background: #fff5f5;
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.promo-item h4 {
+  font-size: 14px;
+  color: #c95550;
+  margin-bottom: 4px;
+}
+
+.promo-item p {
+  font-size: 12px;
+  color: #777;
+}

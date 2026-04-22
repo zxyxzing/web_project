@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>春蕴 · 数字图书展销平台</title>
+  <link rel="stylesheet" href="./css/lab2-2025-118-index.css" />
+  <style>
+    
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+    .modal-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-box {
+      background: #fff;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 16px;
+      padding: 35px;
+      position: relative;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+    .modal-close {
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      font-size: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #666;
+    }
+    .form-panel { display: none; }
+    .form-panel.active { display: block; }
+    .form-panel h2 { margin-bottom: 10px; text-align: center; }
+    .form-panel .tip { text-align: center; color: #666; margin-bottom: 25px; }
+    .input-group { margin-bottom: 18px; }
+    .input-group label { display: block; margin-bottom: 6px; font-size: 14px; }
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    .login-btn-submit {
+      width: 100%;
+      padding: 12px;
+      background: #4a90e2;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .switch-text {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+    .switch-text a {
+      color: #4a90e2;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      background: #4a90e2;
+      color: #fff;
+      border-radius: 6px;
+      z-index: 10000;
+      opacity: 0;
+      transition: 0.3s;
+    }
+    .toast.show { opacity: 1; }
+    .toast.err { background: #f56c6c; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">春韵· 书韵
+      <img src="./image/3edccd48eeefae23adf0b580a8310e8b.jpg"alt="logo">
+    </div>
+    <div class="nav">
+      <ul>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">图书分类</a></li>
+        <li><a href="#">新书上市</a></li>
+        <li><a href="#">春日活动</a></li>
+        <li><a href="#">关于我们</a></li>
+        <li><a id="loginBtn" href="javascript:;">登录</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="left-bar">
+      <h3>图书分类</h3>
+      <ul>
+        <li>📖 文学小说</li>
+        <li>💻 计算机与编程</li>
+        <li>📈 经济管理</li>
+        <li>📜 历史传记</li>
+        <li>🎓 大学教材</li>
+        <li>🔬 科普与科技</li>
+      </ul>
+    </div>
+
+    <div class="center-bar">
+      <h3>春日精选 · 热门推荐</h3>
+      <div class="book-list">
+        <div class="book-item">
+          <img src="./image/3b6929500544a5230b0fac1c167a1d2f.jpg" alt="" />
+          <p>且待绿意满树梢</p>
+        </div>
+        <div class="book-item">
+          <img src="./image/da21b54618d573066b18d06a8ede5d54.jpg" alt="" />
+          <p>阿婆的春天</p>
+        </div>
+        <div class="book-item">
+          <img src="./image/eb6a2b9316c10dc36787700e231ba764.jpg" alt="" />
+          <p>去有花的地方</p>
+        </div>
+        <div class="book-item">
+          <img src="./image/f16d32e99adb9b445aa182a1ba8d26ea.jpg" alt="" />
+          <p>忽如人生寄</p>
+        </div>
+        <div class="book-item">
+          <img src="./image/7b7069555dad2326766cd0f06d85df71.jpg" alt="" />
+          <p>阿勒泰的角落</p>
+        </div>
+        <div class="book-item">
+          <img src="./image/152ea26a5990840e8daaf2751be3f540.jpg" alt="" />
+          <p>春</p>
+        </div>
+      </div>
+
+      <h3>春日新书上市</h3>
+      <table class="new-book-table">
+        <tr>
+          <th>书名</th>
+          <th>作者</th>
+          <th>原价</th>
+          <th>春促价</th>
+        </tr>
+        <tr>
+          <td>见春天</td>
+          <td>纵虎嗅花</td>
+          <td>¥89</td>
+          <td>¥47</td>
+        </tr>
+        <tr>
+          <td>敦煌变</td>
+          <td>邱华栋</td>
+          <td>¥79</td>
+          <td>¥48</td>
+        </tr>
+        <tr>
+          <td>东坡在人间</td>
+          <td>阿来</td>
+          <td>¥128</td>
+          <td>¥86</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="right-bar">
+      <h3>🌿 春日特惠活动</h3>
+      <div class="promo-item">
+        <h4>全场计算机类 8 折</h4>
+        <p>活动时间：4.15 - 4.30</p>
+      </div>
+      <div class="promo-item">
+        <h4>满200减50</h4>
+        <p>会员可叠加折上折</p>
+      </div>
+      <div class="promo-item">
+        <h4>春日赠书</h4>
+        <p>实付满150元赠书签套装</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 登录弹窗 -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-box">
+      <button class="modal-close" id="closeModal">×</button>
+
+      <!-- 登录 -->
+      <div class="form-panel active" id="loginForm">
+        <h2>登录</h2>
+        <p class="tip">欢迎回到春韵书韵</p>
+        <div class="input-group">
+          <label>用户名</label>
+          <input id="loginUser" type="text" placeholder="请输入用户名">
+        </div>
+        <div class="input-group">
+          <label>密码</label>
+          <input id="loginPwd" type="password" placeholder="请输入密码">
+        </div>
+        <button class="login-btn-submit" id="doLogin">登录</button>
+        <div class="switch-text">
+          没有账号？<a id="goToReg">立即注册</a>
+        </div>
+      </div>
+
+      <!-- 注册 -->
+      <div class="form-panel" id="regForm">
+        <h2>注册</h2>
+        <p class="tip">创建你的账号</p>
+        <div class="input-group">
+          <label>用户名</label>
+          <input id="regUser" type="text" placeholder="请输入用户名">
+        </div>
+        <div class="input-group">
+          <label>密码</label>
+          <input id="regPwd" type="password" placeholder="请输入密码">
+        </div>
+        <div class="input-group">
+          <label>确认密码</label>
+          <input id="regPwd2" type="password" placeholder="再次输入密码">
+        </div>
+        <button class="login-btn-submit" id="doReg">注册</button>
+        <div class="switch-text">
+          已有账号？<a id="goToLogin">立即登录</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 提示框 -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const loginBtn = document.getElementById('loginBtn');
+    const closeModal = document.getElementById('closeModal');
+    const loginForm = document.getElementById('loginForm');
+    const regForm = document.getElementById('regForm');
+    const goToReg = document.getElementById('goToReg');
+    const goToLogin = document.getElementById('goToLogin');
+    const toast = document.getElementById('toast');
+
+    function showMsg(msg, err=false){
+      toast.textContent = msg;
+      toast.className = 'toast ' + (err ? 'err' : '');
+      toast.classList.add('show');
+      setTimeout(()=>toast.classList.remove('show'),1800);
+    }
+
+    loginBtn.onclick = ()=>{ modal.classList.add('show'); }
+    closeModal.onclick = ()=>{ modal.classList.remove('show'); }
+    modal.onclick = (e)=>{ if(e.target===modal) modal.classList.remove('show'); }
+
+    goToReg.onclick = ()=>{ loginForm.classList.remove('active'); regForm.classList.add('active'); }
+    goToLogin.onclick = ()=>{ regForm.classList.remove('active'); loginForm.classList.add('active'); }
+
+    // 注册
+    document.getElementById('doReg').onclick = ()=>{
+      let u = document.getElementById('regUser').value.trim();
+      let p = document.getElementById('regPwd').value;
+      let p2 = document.getElementById('regPwd2').value;
+      if(!u||!p||!p2) return showMsg('请填写完整信息',1);
+      if(p!==p2) return showMsg('两次密码不一致',1);
+      if(localStorage.getItem(u)) return showMsg('用户名已存在',1);
+      localStorage.setItem(u, JSON.stringify({pwd:p}));
+      showMsg('注册成功！');
+      regForm.classList.remove('active');
+      loginForm.classList.add('active');
+    }
+
+    // 登录
+    document.getElementById('doLogin').onclick = ()=>{
+      let u = document.getElementById('loginUser').value.trim();
+      let p = document.getElementById('loginPwd').value;
+      let user = localStorage.getItem(u);
+      if(!user) return showMsg('用户不存在',1);
+      if(JSON.parse(user).pwd !== p) return showMsg('密码错误',1);
+      showMsg('登录成功！');
+      modal.classList.remove('show');
+      loginBtn.textContent = '已登录';
+      loginBtn.style.color = '#4a90e2';
+    }
+  </script>
+</body>
+</html>
